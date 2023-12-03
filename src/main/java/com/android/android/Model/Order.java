@@ -35,4 +35,15 @@ public class Order {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Order(Long date, String city, String house, Double subtotal, Double taxes, Double total, List<Sneaker> sneakers, User user){
+        this.date = date;
+        this.city = city;
+        this.house = house;
+        this.subtotal = subtotal;
+        this.taxes = taxes;
+        this.total = total;
+        this.sneakers = sneakers;
+        this.user = user;
+    }
 }
