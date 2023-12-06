@@ -20,12 +20,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    private String username;
+    private String name;
+    private String surname;
     @Column(unique = true)
     private String email;
     private String password;
     @Nullable
-    private byte photo;
+    private Integer photo;
     private String role;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
@@ -34,8 +35,9 @@ public class User {
     @OneToOne
     private Basket basket;
 
-    public User(String username, String email, String password, byte photo, String role) {
-        this.username = username;
+    public User(String name, String surname, String email, String password, Integer photo, String role) {
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.password = password;
         this.photo = photo;
