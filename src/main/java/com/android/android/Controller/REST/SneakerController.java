@@ -6,6 +6,8 @@ import com.android.android.Service.SneakerService;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping({"api/sneaker"})
 public class SneakerController {
@@ -31,14 +33,15 @@ public class SneakerController {
     }
 
     @GetMapping("/get/{id}")
-    public SneakerDTO get(@PathVariable Long id){
+    public SneakerDTO get(@PathVariable("id") Long id){
         return new SneakerDTO(sneakerService.findSneaker(id));
     }
 
     @GetMapping("/getAll")
-    public Page<SneakerDTO> getAll(@RequestParam(defaultValue = "1") int page,
-                                   @RequestParam(defaultValue = "5") int size) {
-        return sneakerService.getAllSneakerPaged(page, size)
-                .map(sneaker -> new SneakerDTO(new Sneaker(sneaker.getBrand(), sneaker.getModel(), sneaker.getDescription(), sneaker.getPrice(), sneaker.getPhoto())));
+    public List<SneakerDTO> getAll(@RequestParam("page") int page,
+                                   @RequestParam("size") int size) {
+        return sneakerService.getAllSneakerPaged(page, size).stream().map(
+                SneakerDTO::new
+        ).toList();
     }
 }
