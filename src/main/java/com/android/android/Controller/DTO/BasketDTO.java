@@ -13,10 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BasketDTO {
     private Long id;
-    private User user;
+    private Long userId;
 
     public BasketDTO(Basket basket){
         this.id = basket.getId();
-        this.user = basket.getUser();
+        this.userId = basket.getUser().getId();
     }
 }

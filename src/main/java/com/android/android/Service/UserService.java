@@ -41,8 +41,7 @@ public class UserService {
     }
 
     @Transactional
-    public Basket getUserBasket(Long id){
-        User user = userRepository.getReferenceById(id);
-        return user.getBasket();
+    public User getUserById(Long id){
+        return userRepository.getReferenceById(id);
     }
 }

@@ -11,9 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class BasketSneaker {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private BasketSneakerId id;
 
     @ManyToOne
     @JoinColumn(name = "basket_id")
@@ -26,6 +25,7 @@ public class BasketSneaker {
     private int quantity;
 
     public BasketSneaker(Basket basket, Sneaker sneaker, int quantity) {
+        this.id = new BasketSneakerId(basket.getId(), sneaker.getId());
         this.basket = basket;
         this.sneaker = sneaker;
         this.quantity = quantity;
