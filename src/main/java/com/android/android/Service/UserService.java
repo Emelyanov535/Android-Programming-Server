@@ -30,7 +30,7 @@ public class UserService {
 
     @Transactional
     public User signUp(UserDTO user){
-        User userCreate = new User(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), user.getPhoto(), user.getRole());
+        User userCreate = new User(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), user.getPhoto(), "USER");
         return userRepository.save(userCreate);
     }
 

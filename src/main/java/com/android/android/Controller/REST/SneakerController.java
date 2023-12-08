@@ -23,12 +23,12 @@ public class SneakerController {
     }
 
     @PutMapping("/update/{id}")
-    public SneakerDTO update(@PathVariable Long id, @RequestBody SneakerDTO sneakerDTO){
+    public SneakerDTO update(@PathVariable("id") Long id, @RequestBody SneakerDTO sneakerDTO){
         return new SneakerDTO(sneakerService.update(id, sneakerDTO.getBrand(), sneakerDTO.getModel(), sneakerDTO.getDescription(), sneakerDTO.getPrice(), sneakerDTO.getPhoto()));
     }
 
     @DeleteMapping("/delete/{id}")
-    public SneakerDTO delete(@PathVariable Long id){
+    public SneakerDTO delete(@PathVariable("id") Long id){
         return new SneakerDTO(sneakerService.delete(id));
     }
 
