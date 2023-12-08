@@ -19,11 +19,10 @@ public class Basket {
     @OneToOne
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "basket_sneaker",
-            joinColumns = @JoinColumn(name = "basket_id"),
-            inverseJoinColumns = @JoinColumn(name = "sneaker_id")
-    )
-    private List<Sneaker> sneakers;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "basket")
+    private List<BasketSneaker> basketSneakers;
+
+    public Basket(User user){
+        this.user = user;
+    }
 }

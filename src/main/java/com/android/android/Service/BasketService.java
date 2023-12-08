@@ -1,5 +1,7 @@
 package com.android.android.Service;
 
+import com.android.android.Model.Basket;
+import com.android.android.Model.User;
 import com.android.android.Repository.BasketRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,10 @@ public class BasketService {
         this.basketRepository = basketRepository;
     }
 
-//    @Transactional
-//    public Basket create()
+    @Transactional
+    public Basket create(User user){
+        Basket basket = new Basket(user);
+        user.setBasket(basket);
+        return basketRepository.save(basket);
+    }
 }
