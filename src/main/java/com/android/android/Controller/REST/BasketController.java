@@ -66,4 +66,11 @@ public class BasketController {
     ){
         basketService.decrementQuantity(basketId, sneakerId);
     }
+
+    @GetMapping("/getSneaker/{basketId}/{sneakerId}")
+    public boolean getSneaker(@PathVariable("basketId") Long basketId,
+                                       @PathVariable("sneakerId") Long sneakerId
+    ){
+        return basketService.getSneaker(basketId, sneakerId);
+    }
 }

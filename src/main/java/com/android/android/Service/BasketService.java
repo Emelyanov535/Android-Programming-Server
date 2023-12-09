@@ -77,4 +77,9 @@ public class BasketService {
     public void decrementQuantity(Long basketId, Long sneakerId){
         basketRepository.decrementSneakerQuantity(basketId, sneakerId);
     }
+
+    @Transactional
+    public boolean getSneaker(Long basketId, Long sneakerId){
+        return basketRepository.existsSneaker(basketId, sneakerId);
+    }
 }
