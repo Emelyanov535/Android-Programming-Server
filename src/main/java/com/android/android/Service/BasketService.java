@@ -82,4 +82,9 @@ public class BasketService {
     public boolean getSneaker(Long basketId, Long sneakerId){
         return basketRepository.existsSneaker(basketId, sneakerId);
     }
+
+    @Transactional
+    public void removeSneakerFromBasket(Long basketId, Long sneakerId){
+        basketSneakerRepository.deleteByBasketIdAndSneakerId(basketId, sneakerId);
+    }
 }
