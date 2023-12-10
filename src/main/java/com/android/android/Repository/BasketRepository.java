@@ -22,4 +22,7 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
     @Transactional
     @Query("SELECT COUNT(bs) > 0 FROM BasketSneaker bs WHERE bs.basket.id = :basketId AND bs.sneaker.id = :sneakerId")
     boolean existsSneaker(@Param("basketId") Long basketId, @Param("sneakerId") Long sneakerId);
+
+    @Query("SELECT COALESCE(SUM(bs.sneaker.price * bs.quantity), 0) FROM BasketSneaker bs WHERE bs.basket.id = :userId")
+    double getTotalPriceForUser(@Param("userId") Long userId);
 }

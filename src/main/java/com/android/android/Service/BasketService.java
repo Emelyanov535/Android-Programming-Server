@@ -87,4 +87,14 @@ public class BasketService {
     public void removeSneakerFromBasket(Long basketId, Long sneakerId){
         basketSneakerRepository.deleteByBasketIdAndSneakerId(basketId, sneakerId);
     }
+
+    @Transactional
+    public double getTotalPriceForUserBasket(Long userId){
+        return basketRepository.getTotalPriceForUser(userId);
+    }
+
+    @Transactional
+    public void deleteAllSneakerFromBasket(Long basketId){
+        basketSneakerRepository.deleteByBasketId(basketId);
+    }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class OrderDTO {
+    private Long id;
     private Long date;
     private String city;
     private String street;
@@ -21,8 +22,10 @@ public class OrderDTO {
     private Double subtotal;
     private Double taxes;
     private Double total;
+    private Long userId;
 
     public OrderDTO(Order order) {
+        this.id = order.getId();
         this.date = order.getDate();
         this.city = order.getCity();
         this.street = order.getStreet();
@@ -30,5 +33,6 @@ public class OrderDTO {
         this.subtotal = order.getSubtotal();
         this.taxes = order.getTaxes();
         this.total = order.getTotal();
+        this.userId = order.getUser().getId();
     }
 }

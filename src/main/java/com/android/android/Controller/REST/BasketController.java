@@ -80,4 +80,14 @@ public class BasketController {
     ){
         basketService.removeSneakerFromBasket(basketId, sneakerId);
     }
+
+    @GetMapping("/getUserPrice/{userId}")
+    public double getTotalPriceForUserBasket(@PathVariable("userId") Long userId){
+        return basketService.getTotalPriceForUserBasket(userId);
+    }
+
+    @GetMapping("/deleteAllSneakerFromBasket/{basketId}")
+    public void deleteAllSneakerFromBasket(@PathVariable("basketId") Long basketId){
+        basketService.deleteAllSneakerFromBasket(basketId);
+    }
 }

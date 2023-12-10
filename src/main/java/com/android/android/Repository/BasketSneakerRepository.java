@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface BasketSneakerRepository extends JpaRepository<BasketSneaker, BasketSneakerId> {
     @Transactional
     void deleteByBasketIdAndSneakerId(Long basketId, Long sneakerId);
+
+    @Transactional
+    void deleteByBasketId(Long basketId);
 }

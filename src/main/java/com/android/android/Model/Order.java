@@ -24,26 +24,21 @@ public class Order {
     private Double taxes;
     private Double total;
 
-    @ManyToMany
-    @JoinTable(
-            name = "order_sneaker",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "sneaker_id")
-    )
-    private List<Sneaker> sneakers;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "_order", cascade = CascadeType.ALL)
+    private List<OrderSneaker> orderSneakers;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Order(Long date, String city, String house, Double subtotal, Double taxes, Double total, List<Sneaker> sneakers, User user){
+    public Order(Long date, String city, String street, String house, Double subtotal, Double taxes, Double total, User user){
         this.date = date;
         this.city = city;
+        this.street = street;
         this.house = house;
         this.subtotal = subtotal;
         this.taxes = taxes;
         this.total = total;
-        this.sneakers = sneakers;
         this.user = user;
     }
 }
