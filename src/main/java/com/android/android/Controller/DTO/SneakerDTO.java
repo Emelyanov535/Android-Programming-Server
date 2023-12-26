@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.nio.charset.StandardCharsets;
+
 @Schema(description = "Информация о кроссовке")
 @Getter
 @Setter
@@ -16,7 +18,7 @@ public class SneakerDTO {
     private String model;
     private String description;
     private Double price;
-    private Integer photo;
+    private String photo;
 
     public SneakerDTO(Sneaker sneaker) {
         this.id = sneaker.getId();
@@ -24,6 +26,6 @@ public class SneakerDTO {
         this.brand = sneaker.getBrand();
         this.description = sneaker.getDescription();
         this.price = sneaker.getPrice();
-        this.photo = sneaker.getPhoto();
+        this.photo = new String(sneaker.getPhoto(), StandardCharsets.UTF_8);
     }
 }

@@ -6,6 +6,7 @@ import com.android.android.Service.SneakerService;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -19,12 +20,12 @@ public class SneakerController {
 
     @PostMapping({"/create"})
     public SneakerDTO create(@RequestBody SneakerDTO sneakerDTO) {
-        return new SneakerDTO(sneakerService.insert(sneakerDTO.getBrand(), sneakerDTO.getModel(), sneakerDTO.getDescription(), sneakerDTO.getPrice(), sneakerDTO.getPhoto()));
+        return new SneakerDTO(sneakerService.insert(sneakerDTO));
     }
 
     @PutMapping("/update/{id}")
     public SneakerDTO update(@PathVariable("id") Long id, @RequestBody SneakerDTO sneakerDTO){
-        return new SneakerDTO(sneakerService.update(id, sneakerDTO.getBrand(), sneakerDTO.getModel(), sneakerDTO.getDescription(), sneakerDTO.getPrice(), sneakerDTO.getPhoto()));
+        return new SneakerDTO(sneakerService.update(id, sneakerDTO.getBrand(), sneakerDTO.getModel(), sneakerDTO.getDescription(), sneakerDTO.getPrice(), sneakerDTO.getPhoto().getBytes(StandardCharsets.UTF_8)));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -43,5 +44,12 @@ public class SneakerController {
         return sneakerService.getAllSneakerPaged(page, size).stream().map(
                 SneakerDTO::new
         ).toList();
+    }
+
+    @GetMapping("/findSneakersByString/{string}")
+    public List<SneakerDTO> findSneakersByString(@PathVariable("string") String str,
+                                                 @RequestParam("page") int page,
+                                                 @RequestParam("size") int size) {
+        return sneakerService.findSneakersByString(str, page, size).stream().map(SneakerDTO::new).toList();
     }
 }

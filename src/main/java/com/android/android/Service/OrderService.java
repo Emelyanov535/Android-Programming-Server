@@ -1,11 +1,15 @@
 package com.android.android.Service;
 
+import com.android.android.Controller.DTO.ExpandedOrderDTO;
 import com.android.android.Controller.DTO.OrderDTO;
+import com.android.android.Controller.DTO.ReportDTO;
+import com.android.android.Controller.DTO.SneakerCountPair;
 import com.android.android.Model.*;
 import com.android.android.Repository.OrderRepository;
 import com.android.android.Repository.OrderSneakerRepository;
 import com.android.android.Repository.UserRepository;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,5 +62,15 @@ public class OrderService {
     @Transactional
     public void deleteOrder(Long orderId){
         orderRepository.delete(findOrderById(orderId));
+    }
+
+    @Transactional
+    public ReportDTO getReportOrders(Long dateFrom, Long dateTo){
+        return new ReportDTO(
+                orderRepository.countOrdersBetweenDate(dateFrom, dateTo),
+                orderRepository.averageTotalBetweenDate(dateFrom, dateTo),
+                orderRepository.getMostFrequentSneakersBetweenDate(dateFrom, dateTo).stream().map(SneakerCountPair::new).toList(),
+                orderRepository.getOrderBetweenDate(dateFrom, dateTo).stream().map(ExpandedOrderDTO::new).toList()
+        );
     }
 }

@@ -18,9 +18,10 @@ public class Sneaker {
     private String model;
     private String description;
     private Double price;
-    private Integer photo;
+    @Lob
+    private byte[] photo;
 
-    public Sneaker(String brand, String model, String description, Double price, Integer photo) {
+    public Sneaker(String brand, String model, String description, Double price, byte[] photo) {
         this.brand = brand;
         this.description = description;
         this.model = model;
