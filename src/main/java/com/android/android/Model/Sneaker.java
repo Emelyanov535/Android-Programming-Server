@@ -18,7 +18,6 @@ public class Sneaker {
     private String model;
     private String description;
     private Double price;
-    @Lob
     private byte[] photo;
 
     public Sneaker(String brand, String model, String description, Double price, byte[] photo) {

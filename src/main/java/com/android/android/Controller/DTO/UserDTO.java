@@ -20,6 +20,7 @@ public class UserDTO {
     private String email;
     private String password;
     private Integer photo;
+    private String role;
 
     public UserDTO(User user){
         this.id = user.getId();
@@ -28,5 +29,6 @@ public class UserDTO {
         this.name = user.getName();
         this.surname = user.getSurname();
         this.photo = user.getPhoto();
+        this.role = user.getRole();
     }
 }
